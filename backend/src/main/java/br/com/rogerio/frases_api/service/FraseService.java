@@ -13,11 +13,20 @@ import java.net.http.HttpResponse;
 @Service
 public class FraseService {
 
+    URI fraseDia = URI.create("https://www.fraseestoica.com.br/api");
+
+
+    private final HttpClient httpClient;
+    private final ObjectMapper objectMapper;
+
+    public FraseService(HttpClient httpClient, ObjectMapper objectMapper) {
+        this.httpClient = httpClient;
+        this.objectMapper = objectMapper;
+    }
+
+
     public Frase buscarFrase() {
 
-        URI fraseDia = URI.create("https://www.fraseestoica.com.br/api");
-        HttpClient client = HttpClient.newHttpClient();
-        final var objectMapper = new ObjectMapper();
 
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -27,7 +36,7 @@ public class FraseService {
         HttpResponse<String> response = null;
 
         try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString()
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString()
             );
 
 
