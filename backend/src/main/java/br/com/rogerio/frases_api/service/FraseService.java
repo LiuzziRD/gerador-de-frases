@@ -16,6 +16,7 @@ public class FraseService {
     URI fraseDia = URI.create("https://www.fraseestoica.com.br/api");
 
 
+
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
@@ -26,8 +27,6 @@ public class FraseService {
 
 
     public Frase buscarFrase() {
-
-
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(fraseDia)
@@ -40,11 +39,29 @@ public class FraseService {
             );
 
 
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("Erro ao consultar a API!");
+            int status = response.statusCode();
+            if (status == 200) {
+
+                return objectMapper.readValue( response.body(), Frase.class);
+
+
+            }else if (status >=400 && status < 500) {
+                throw new RuntimeException("Erro na requisição. Status: " + status);
+
+            }else  if (status >= 500 && status < 600) {
+                throw new RuntimeException("Erro no servidor da API. Status: " + status);
+            }else{
+                throw new RuntimeException("Status HTTP inesperado: " + status);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Não consegui realizar a comunicação com a API.", e);
+        }catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("A requisição foi interrompida.", e);
         }
 
-        return objectMapper.readValue( response.body(), Frase.class);
+
     }
 
 
