@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frase do dia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Camada de fundo (animação). Só decoração, por isso aria-hidden. -->
+  <div class="fundo" aria-hidden="true">
+
+    <!-- Moldes dos bustos (desenhados uma vez, reusados abaixo com <use>) -->
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <!-- Filósofo de barba, de perfil olhando pra direita -->
+        <symbol id="busto-barba" viewBox="0 0 200 260">
+          <path d="M10 260 C10 218 42 198 78 188 L122 188 C158 198 190 218 190 260 Z"/>
+          <path d="M86 150 L118 150 L122 192 L82 192 Z"/>
+          <path d="M70 62 C68 28 128 24 142 60 C146 72 150 82 158 94 L149 99 C151 105 147 109 143 109
+                   C147 132 132 166 100 174 C68 166 56 140 62 108 C55 90 60 72 70 62 Z"/>
+        </symbol>
+        <!-- Filósofo com coroa de louros -->
+        <symbol id="busto-louro" viewBox="0 0 200 260">
+          <path d="M10 260 C10 218 42 198 78 188 L122 188 C158 198 190 218 190 260 Z"/>
+          <path d="M86 150 L118 150 L122 192 L82 192 Z"/>
+          <path d="M72 66 C70 34 126 30 140 64 C144 76 148 86 154 98 L146 103 C148 109 144 113 140 113
+                   C144 128 138 146 120 152 C96 158 76 146 68 120 C62 100 64 78 72 66 Z"/>
+          <ellipse cx="82" cy="50" rx="9" ry="5" transform="rotate(-30 82 50)"/>
+          <ellipse cx="100" cy="42" rx="9" ry="5"/>
+          <ellipse cx="118" cy="44" rx="9" ry="5" transform="rotate(25 118 44)"/>
+          <ellipse cx="133" cy="54" rx="8" ry="5" transform="rotate(50 133 54)"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="silhueta s1"><svg><use href="#busto-barba"/></svg></div>
+    <div class="silhueta s2"><svg><use href="#busto-louro"/></svg></div>
+    <div class="silhueta s3"><svg><use href="#busto-barba"/></svg></div>
+    <div class="silhueta s4 volta"><svg><use href="#busto-louro"/></svg></div>
+    <div class="silhueta s5 volta"><svg><use href="#busto-barba"/></svg></div>
+
+  </div>
+
+  <main class="cartao">
+    <figure class="frase">
+      <blockquote>
+        <p id="frase">Frase</p>
+      </blockquote>
+      <figcaption id="autor">Autor</figcaption>
+    </figure>
+
+    <time id="data">dd/mm/yyyy</time>
+  </main>
+
+</body>
+</html>
